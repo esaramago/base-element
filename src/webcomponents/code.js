@@ -31,6 +31,12 @@ class Code extends BaseElement {
         overflow: auto;
         padding-inline-end: 2rem;
       }
+
+      @media (prefers-color-scheme: light) {
+        :host {
+          background-color: #EEE;
+        }
+      }
     `
   }
 }
