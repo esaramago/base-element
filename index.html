@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Base Element</title>
+  </head>
+  <body>
+    <header>
+      <base-card name="Base Element"></base-card>
+      <p><strong>Base Element</strong> is a javascript Class that extends HTMLElement and provides a set of properties and methods for creating custom <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">web components</a>.</p>
+    </header>
+    <section class="l-stack">
+      <div>
+        <h2>Some random web components</h2>
+        <p>Created with the help of <strong>Base Element</strong>.</p>
+      </div>
+      <div class="l-grid">
+        <base-button label="Button"></base-button>
+        <base-input label="Input" id="input"></base-input>
+        <base-alert type="info" message="Info"></base-alert>
+        <base-alert type="error" message="Error"></base-alert>
+        <base-switch id="switch" label="Toggle me"></base-switch>
+        <div class="l-grid">
+          <base-badge text="New"></base-badge>
+          <base-badge type="success" text="Success"></base-badge>
+          <base-badge type="warning" text="Warning"></base-badge>
+          <base-badge type="error" text="Error"></base-badge>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Getting started</h2>
+      <p>Download <code>base-element.js</code> from <code>node_modules/base-element/src/base-element.js</code> to your project.</p>
+    </section>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

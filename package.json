@@ -1,0 +1,25 @@
+{
+  "name": "base-element",
+  "version": "1.0.0",
+  "type": "module",
+  "author": {
+    "name": "Emanuel Saramago",
+    "email": "dev@emanuelsaramago.com",
+    "url": "https://emanuelsaramago.com"
+    },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esaramago/base-element.git",
+    "directory": "/src"
+  },
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.0.4"
+  }
+}
