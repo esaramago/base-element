@@ -32,7 +32,47 @@
 
     <section>
       <h2>Getting started</h2>
-      <p>Download <code>base-element.js</code> from <code>node_modules/base-element/src/base-element.js</code> to your project.</p>
+      <ol>
+        <li>Download <a href="https://raw.githubusercontent.com/esaramago/base-element/refs/heads/main/src/base-element.js"><code>base-element.js</code></a> from <a href="https://github.com/esaramago/base-element/blob/main/src/base-element.js">GitHub's Base Element repository</a> to your project.</li>
+        <li>Create a new file for your web component.</li>
+        <li>Import <code>base-element.js</code> in your component file like this: <code>import { BaseElement } from "./path/to/base-element.js"</code>.</li>
+        <li>Use <code>BaseElement</code> as a base class for your custom elements.</li>
+      </ol>
+
+      <p>Here's an example of a custom element:</p>
+      
+      <pre><code>
+        /* webcomponents/MyComponent.js */
+        import { BaseElement } from "./base-element.js"
+
+        class MyComponent extends BaseElement {
+          properties = {
+            // your component's properties here
+          }
+
+          styles() {
+            return /* css */`
+              // your css styles here
+            `
+          }
+
+          render() {
+            return /* html */`
+              // your html template here
+            `
+          }
+
+          mounted() {
+            // your mounted logic here
+          }
+
+          updated(property, oldValue, newValue) {
+            // your updated logic here
+          }
+        }
+
+        customElements.define("my-component", MyComponent);
+      </code></pre>
     </section>
 
     <script type="module" src="/src/main.js"></script>
