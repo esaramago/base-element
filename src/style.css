@@ -158,3 +158,24 @@ footer {
 .t-text-center {
   text-align: center;
 }
+
+/* To prevent FOUC, these webcomponents starts as invisible */
+base-code:not(:defined),
+base-alert:not(:defined),
+base-button:not(:defined),
+base-switch:not(:defined),
+base-badge:not(:defined),
+base-input:not(:defined),
+base-counter:not(:defined) {
+  opacity: 0;
+  transition: opacity .2s ease-in-out;
+}
+base-code:defined,
+base-alert:defined,
+base-button:defined,
+base-switch:defined,
+base-badge:defined,
+base-input:defined,
+base-counter:defined {
+  opacity: 1;
+}
