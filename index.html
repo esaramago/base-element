@@ -8,7 +8,7 @@
   </head>
   <body>
     <header>
-      <base-hello name="Base Element"></base-hello>
+      <base-hello name="Base Element" id="header-hello"></base-hello>
       <p><strong>Base Element</strong> is a javascript Class that extends HTMLElement and provides a set of properties and methods for creating custom <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">web components</a>.</p>
     </header>
 
@@ -71,6 +71,8 @@
         // your component's properties here
       }
 
+      static observedAttributes = []
+
       styles() {
         return /* css */`
           // your css styles here
@@ -114,7 +116,9 @@
           type: Number
         }
       }
-    
+      
+      static observedAttributes = ['count']
+      
       styles() {
         return /* css */`
           .counter {

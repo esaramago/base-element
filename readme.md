@@ -36,6 +36,8 @@ class MyComponent extends BaseElement {
     }
   }
 
+  static observedAttributes = ['myProperty'] // Array of attribute names to observe for changes
+
   styles() {
     return /* css */`
       // Your component's styles

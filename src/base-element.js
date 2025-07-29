@@ -18,12 +18,6 @@ export class BaseElement extends HTMLElement {
   }
 
   /**
-   * Indicates whether the element has been mounted in the DOM.
-   * @type {boolean}
-   */
-  isMounted = false
-
-  /**
    * Configuration object for custom properties.
    * Each property can have:
    * - value: Default value
@@ -33,6 +27,18 @@ export class BaseElement extends HTMLElement {
    * @type {Object}
    */
   properties = {}
+
+  /**
+   * Array of attribute names to observe for changes.
+   * @type {string[]}
+   */
+  static observedAttributes = []
+
+  /**
+   * Indicates whether the element has been mounted in the DOM.
+   * @type {boolean}
+   */
+  isMounted = false
   
   /**
    * Renders the component's content.

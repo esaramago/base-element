@@ -9,9 +9,13 @@ class Hello extends BaseElement {
     },
   }
 
+  #name
+
+  static observedAttributes = ['name']
+
   render() {
     return /* html */`
-      <h1>Hello, ${this.name}!</h1>
+      <h1>Hello, <span id="name"><span id="name-text">${this.name}</span></span>!</h1>
     `
   }
 
@@ -20,7 +24,32 @@ class Hello extends BaseElement {
       h1 {
         font-size: clamp(2rem, 5vw, 3rem);
       }
+      #name-text {
+        color: var(--primary-color);
+        transition: color 2s ease-in;
+      }
+      #name-text.updated {
+        color: #FFF;
+      }
     `
+  }
+
+  mounted() {
+    this.#name = this.shadowRoot.getElementById('name')
+    this.#renderRandomName()
+  }
+
+  updated(property, oldValue, newValue) {
+    if (property === 'name') {
+      this.#renderRandomName()
+    }
+  }
+
+  #renderRandomName() {
+    this.#name.innerHTML = /* html */`<span id="name-text" >${this.name}</span>`
+    setTimeout(() => {
+      this.#name.querySelector('#name-text').classList.add('updated')
+    }, 1)
   }
 }
 
