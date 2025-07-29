@@ -40,9 +40,7 @@ export class BaseElement extends HTMLElement {
    * @abstract
    * @returns {string} HTML string to be rendered in the shadow DOM
    */
-  render() {
-    throw new Error('render() method must be implemented by subclasses')
-  }
+  render() {}
 
   /**
    * Lifecycle method called when the element is mounted.
@@ -197,7 +195,11 @@ export class BaseElement extends HTMLElement {
     } else if (prop.type === Number) {
       value = Number(value)
     } else if (prop.type === Boolean) {
-      value = Boolean(value)
+      if (value === "true" || value === true || value === "") {
+        value = true
+      } else {
+        value = false
+      }
     }
 
     if (prop.required && !value) {

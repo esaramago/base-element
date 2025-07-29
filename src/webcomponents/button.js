@@ -18,16 +18,11 @@ class Button extends BaseElement {
     disabled: {
       value: false,
       type: Boolean
-    },
-    label: {
-      value: "Button",
-      type: String,
-      required: true
     }
   }
 
   render() {
-    const { variant, size, disabled, label } = this
+    const { variant, size, disabled } = this
     const classes = [
       "base-button",
       `base-button--${variant}`,
@@ -36,8 +31,8 @@ class Button extends BaseElement {
     ].filter(Boolean).join(" ")
 
     return /* html */`
-      <button class="${classes}" ?disabled="${disabled}">
-        ${label}
+      <button class="${classes}" ${disabled ? "disabled" : ""}>
+        <slot></slot>
       </button>
     `
   }

@@ -7,16 +7,17 @@
   </head>
   <body>
     <header>
-      <base-card name="Base Element"></base-card>
+      <base-hello name="Base Element"></base-hello>
       <p><strong>Base Element</strong> is a javascript Class that extends HTMLElement and provides a set of properties and methods for creating custom <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">web components</a>.</p>
     </header>
+
     <section class="l-stack">
       <div>
         <h2>Some random web components</h2>
-        <p>Created with the help of <strong>Base Element</strong>.</p>
+        <p class="t-text-center">Created with the help of <strong>Base Element</strong>.</p>
       </div>
       <div class="l-grid">
-        <base-button label="Button"></base-button>
+        <base-button label="Button">Button</base-button>
         <base-input label="Input" id="input"></base-input>
         <base-alert type="info" message="Info"></base-alert>
         <base-alert type="error" message="Error"></base-alert>
@@ -27,10 +28,29 @@
           <base-badge type="warning" text="Warning"></base-badge>
           <base-badge type="error" text="Error"></base-badge>
         </div>
+        <base-counter count="3"></base-counter>
       </div>
     </section>
 
-    <section>
+    <section class="l-stack">
+      <h2>Why and when to use Base Element?</h2>
+      <div class="l-row">
+        <base-card>
+          <h3 slot="title">No dependencies</h3>
+          <p>You don't need npm or any dependencies. Just a <a href="https://raw.githubusercontent.com/esaramago/base-element/refs/heads/main/src/base-element.js">js file</a>.</p>
+        </base-card>
+        <base-card>
+          <h3 slot="title">No tools needed</h3>
+          <p>No build tools, no transpilers, no bundlers, no frameworks.<br>Just import a <a href="https://raw.githubusercontent.com/esaramago/base-element/refs/heads/main/src/base-element.js">js file</a>.</p>
+        </base-card>
+        <base-card>
+          <h3 slot="title">Lightweight and fast</h3>
+          <p>Small footprint, fast loading. Just a <a href="https://raw.githubusercontent.com/esaramago/base-element/refs/heads/main/src/base-element.js">2.5kb file</a>, if minified.</p>
+        </base-card>
+      </div>
+    </section>
+
+    <section class="l-stack">
       <h2>Getting started</h2>
       <ol>
         <li>Download <a href="https://raw.githubusercontent.com/esaramago/base-element/refs/heads/main/src/base-element.js"><code>base-element.js</code></a> from <a href="https://github.com/esaramago/base-element/blob/main/src/base-element.js">GitHub's Base Element repository</a> to your project.</li>
@@ -39,41 +59,114 @@
         <li>Use <code>BaseElement</code> as a base class for your custom elements.</li>
       </ol>
 
-      <p>Here's an example of a custom element:</p>
+      <h3>Here's the boilerplate of a custom element:</h3>
       
-      <pre><code>
-        /* webcomponents/MyComponent.js */
-        import { BaseElement } from "./base-element.js"
+      <base-code>
+    /* webcomponents/MyComponent.js */
+    import { BaseElement } from "./path/to/base-element.js"
 
-        class MyComponent extends BaseElement {
-          properties = {
-            // your component's properties here
-          }
+    class MyComponent extends BaseElement {
+      properties = {
+        // your component's properties here
+      }
 
-          styles() {
-            return /* css */`
-              // your css styles here
-            `
-          }
+      styles() {
+        return /* css */`
+          // your css styles here
+        `
+      }
 
-          render() {
-            return /* html */`
-              // your html template here
-            `
-          }
+      render() {
+        return /* html */`
+          // your html template here
+        `
+      }
 
-          mounted() {
-            // your mounted logic here
-          }
+      mounted() {
+        // your mounted logic here
+      }
 
-          updated(property, oldValue, newValue) {
-            // your updated logic here
-          }
+      updated(property, oldValue, newValue) {
+        // your updated logic here
+      }
+    }
+
+    customElements.define("my-component", MyComponent);
+      </base-code>
+
+      
+      <h4>Now, a Counter component:</h4>
+      
+      <base-code>
+    /* webcomponents/Counter.js */
+    import { BaseElement } from "./path/to/base-element.js"
+
+    class Counter extends BaseElement {
+
+      #incrementButton
+      #decrementButton
+      #input
+    
+      properties = {
+        count: {
+          value: 0,
+          type: Number
         }
-
-        customElements.define("my-component", MyComponent);
-      </code></pre>
+      }
+    
+      styles() {
+        return /* css */`
+          .counter {
+            display: flex;
+            gap: 1rem;
+            max-width: 13rem;
+          }
+          base-input::part(input) {
+            text-align: center;
+          }
+        `
+      }
+    
+      render() {
+        return /* html */`
+          <div class="counter">
+            <base-button type="button" id="decrement">-</base-button>
+            <base-input type="number" value="${this.count}" id="input" label-hidden></base-input>
+            <base-button type="button" id="increment">+</base-button>
+          </div>
+        `
+      }
+    
+      mounted() {
+        this.#incrementButton = this.shadowRoot.getElementById("increment")
+        this.#decrementButton = this.shadowRoot.getElementById("decrement")
+        this.#input = this.shadowRoot.getElementById("input")
+    
+        this.#incrementButton.addEventListener("click", () => {
+          this.count++
+          this.#input.value = this.count
+        })
+    
+        this.#decrementButton.addEventListener("click", () => {
+          this.count--
+          this.#input.value = this.count
+        })
+      }
+    }
+    
+    customElements.define("base-counter", Counter);
+      </base-code>
     </section>
+
+    <footer>
+      <p>Created by <a href="https://emanuelsaramago.com">Emanuel Saramago</a></p>
+      <ul>
+        <li><a href="https://github.com/esaramago/">GitHub</a></li>
+        <li><a href="https://bsky.app/profile/emanuelsaramago.com">Bluesky</a></li>
+        <li><a href="https://linkedin.com/in/emanuelsaramago">LinkedIn</a></li>
+        <li><a href="mailto:dev@emanuelsaramago.com">dev@emanuelsaramago.com</a></li>
+      </ul>
+    </footer>
 
     <script type="module" src="/src/main.js"></script>
   </body>

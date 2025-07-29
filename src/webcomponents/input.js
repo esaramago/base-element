@@ -19,13 +19,14 @@ class Input extends BaseElement {
       value: "Input",
       type: String
     },
+    labelHidden: Boolean,
     placeholder: {
       value: "",
       type: String
     },
     value: {
       value: "",
-      type: String
+      type: String || Number
     },
     required: {
       value: false,
@@ -45,8 +46,11 @@ class Input extends BaseElement {
     }
   }
 
+  static observedAttributes = ["value"]
+
   render() {
-    const { id, type, label, placeholder, value, required, disabled, error, errorMessage } = this
+    const { id, type, label, labelHidden, placeholder, value, required, disabled, error, errorMessage } = this
+    
     const classes = [
       "base-input",
       error ? "base-input--error" : "",
@@ -55,15 +59,16 @@ class Input extends BaseElement {
 
     return /* html */`
       <div class="base-input-container">
-        <label for="${id}">${label}</label>
+        <label for="${id}" ${labelHidden ? "hidden" : ""}>${label}</label>
         <input
+          part="input"
           id="${id}"
           name="${id}"
           type="${type}"
           placeholder="${placeholder}"
           value="${value}"
-          ?required="${required}"
-          ?disabled="${disabled}"
+          ${required ? "required" : ""}
+          ${disabled ? "disabled" : ""}
           class="${classes}"
         />
         ${error && errorMessage ? `<div class="base-input-error">${errorMessage}</div>` : ``}
@@ -85,12 +90,14 @@ class Input extends BaseElement {
       }
 
       .base-input {
-        padding: 0.5rem 0.75rem;
+        padding: 0.5rem 0.5rem .5rem 1rem;
         border: 1px solid #646cff;
         border-radius: 4px;
         font-family: inherit;
         font-size: 1rem;
         transition: all 0.2s ease;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       .base-input:focus {
@@ -122,6 +129,12 @@ class Input extends BaseElement {
         text-align: initial;
       }
     `
+  }
+
+  updated(property, oldValue, newValue) {
+    if (property === "value") {
+      this.shadowRoot.querySelector("input").value = newValue
+    }
   }
 }
 
