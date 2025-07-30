@@ -49,7 +49,7 @@ class Hello extends BaseElement {
     this.#name.innerHTML = /* html */`<span id="name-text" >${this.name}</span>`
     setTimeout(() => {
       this.#name.querySelector('#name-text').classList.add('updated')
-    }, 1)
+    }, 10)
   }
 }
 

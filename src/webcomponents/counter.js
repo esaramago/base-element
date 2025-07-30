@@ -17,21 +17,55 @@ class Counter extends BaseElement {
     return /* css */`
       .counter {
         display: flex;
-        gap: 1rem;
-        max-width: 13rem;
+        width: 18rem;
+        justify-content: center;
       }
-      base-input::part(input) {
+      label {
+        visibility: hidden;
+        position: absolute;
+      }
+      input {
         text-align: center;
+        width: 4rem;
+        border: none;
+        background-color: transparent;
+        font-size: 1.8rem;
+        font-weight: 600;
+        font-family: inherit;
+      }
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button 
+      {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      /* For Firefox  */
+      
+      input[type="number"] {
+          -moz-appearance: textfield;
+      }
+      
+      base-button span {
+        display: block;
+        padding-block-end: 0.4rem;
+        font-size: 1.8rem;
+        line-height: 1.2;
       }
     `
   }
 
   render() {
+    const { count } = this
     return /* html */`
       <div class="counter">
-        <base-button type="button" id="decrement">-</base-button>
-        <base-input type="number" value="${this.count}" id="input" label-hidden></base-input>
-        <base-button type="button" id="increment">+</base-button>
+        <base-button type="button" id="decrement" aria-hidden="true">
+          <span>-</span>
+        </base-button>
+        <label for="input">Counter</label>
+        <input type="number" value="${count}" id="input" />
+        <base-button type="button" id="increment" aria-hidden="true">
+          <span>+</span>
+        </base-button>
       </div>
     `
   }

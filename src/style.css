@@ -84,9 +84,11 @@ footer {
   gap: 1rem;
 
   > ul {
+    padding-inline-start: 0;
     display: flex;
     flex-direction: column;
     list-style: none;
+    gap: 1rem;
   }
 }
 

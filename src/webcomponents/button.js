@@ -18,11 +18,15 @@ class Button extends BaseElement {
     disabled: {
       value: false,
       type: Boolean
+    },
+    ariaHidden: {
+      value: false,
+      type: Boolean
     }
   }
 
   render() {
-    const { variant, size, disabled } = this
+    const { variant, size, disabled, ariaHidden } = this
     const classes = [
       "base-button",
       `base-button--${variant}`,
@@ -31,7 +35,7 @@ class Button extends BaseElement {
     ].filter(Boolean).join(" ")
 
     return /* html */`
-      <button class="${classes}" ${disabled ? "disabled" : ""}>
+      <button class="${classes}" ${disabled ? "disabled" : ""} ${ariaHidden ? "aria-hidden=true" : ""}>
         <slot></slot>
       </button>
     `
@@ -39,7 +43,14 @@ class Button extends BaseElement {
 
   styles() {
     return /* css */`
+      :host {
+        display: flex;
+        justify-content: center;
+      }
       .base-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding: 0.5rem 1rem;
         border-radius: 4px;
         border: 1px solid transparent;
@@ -47,6 +58,8 @@ class Button extends BaseElement {
         font-size: 1rem;
         cursor: pointer;
         transition: all 0.2s ease;
+        height: 2.8rem;
+        min-width: 3.4rem;
       }
 
       .base-button--primary {

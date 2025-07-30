@@ -90,7 +90,7 @@ class Input extends BaseElement {
       }
 
       .base-input {
-        padding: 0.5rem 0.5rem .5rem 1rem;
+        padding: 0.5rem;
         border: 1px solid #646cff;
         border-radius: 4px;
         font-family: inherit;

@@ -29,12 +29,6 @@ export class BaseElement extends HTMLElement {
   properties = {}
 
   /**
-   * Array of attribute names to observe for changes.
-   * @type {string[]}
-   */
-  static observedAttributes = []
-
-  /**
    * Indicates whether the element has been mounted in the DOM.
    * @type {boolean}
    */

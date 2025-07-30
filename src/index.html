@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Base Element</title>
-    <link rel="icon" type="image/svg+xml" href="/base-element.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   </head>
   <body>
     <header>
-      <base-hello name="Base Element" id="header-hello"></base-hello>
+      <!-- <base-hello name="Base Element" id="header-hello"></base-hello> -->
       <p><strong>Base Element</strong> is a javascript Class that extends HTMLElement and provides a set of properties and methods for creating custom <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components">web components</a>.</p>
     </header>
 
@@ -38,15 +38,15 @@
       <div class="l-row">
         <base-card>
           <h3 slot="title">No dependencies</h3>
-          <p>You don't need npm or any dependencies. Just a <a href="https://raw.githubusercontent.com/esaramago/base-element/refs/heads/main/src/base-element.js">js file</a>.</p>
+          <p>You don't need npm or any dependencies. Just a <a href="https://github.com/esaramago/base-element/tree/main/dist/base-element.min.js">js file</a>.</p>
         </base-card>
         <base-card>
           <h3 slot="title">No tools needed</h3>
-          <p>No build tools, no transpilers, no bundlers, no frameworks.<br>Just import a <a href="https://raw.githubusercontent.com/esaramago/base-element/refs/heads/main/src/base-element.js">js file</a>.</p>
+          <p>No build tools, no transpilers, no bundlers, no frameworks.<br>Just import a <a href="https://github.com/esaramago/base-element/tree/main/dist/base-element.min.js">js file</a>.</p>
         </base-card>
         <base-card>
           <h3 slot="title">Lightweight and fast</h3>
-          <p>Small footprint, fast loading. Just a <a href="https://raw.githubusercontent.com/esaramago/base-element/refs/heads/main/src/base-element.js">~2.5kb file</a>, if minified.</p>
+          <p>Small footprint, fast loading. Just a <a href="https://github.com/esaramago/base-element/tree/main/dist/base-element.min.js">~1.7kb file</a> (0.8kb gzipped).</p>
         </base-card>
       </div>
     </section>
@@ -54,7 +54,7 @@
     <section class="l-stack">
       <h2>Getting started</h2>
       <ol>
-        <li>Download <a href="https://raw.githubusercontent.com/esaramago/base-element/refs/heads/main/src/base-element.js"><code>base-element.js</code></a> from <a href="https://github.com/esaramago/base-element/blob/main/src/base-element.js">GitHub's Base Element repository</a> to your project.</li>
+        <li>Download <a href="https://raw.githubusercontent.com/esaramago/base-element/refs/heads/main/dist/base-element.min.js"><code>base-element.js</code></a> from <a href="https://github.com/esaramago/base-element/">GitHub's Base Element repository</a> to your project.</li>
         <li>Create a new file for your web component.</li>
         <li>Import <code>base-element.js</code> in your component file like this: <code>import { BaseElement } from "./path/to/base-element.js"</code>.</li>
         <li>Use <code>BaseElement</code> as a base class for your custom elements.</li>
@@ -70,8 +70,6 @@
       properties = {
         // your component's properties here
       }
-
-      static observedAttributes = []
 
       styles() {
         return /* css */`
@@ -117,8 +115,6 @@
         }
       }
       
-      static observedAttributes = ['count']
-      
       styles() {
         return /* css */`
           .counter {
@@ -163,6 +159,11 @@
       </base-code>
     </section>
 
+    <section class="l-stack">
+      <h2>Contributing</h2>
+      <p>Contributions are welcome! Please read <a href="https://github.com/esaramago/base-element/blob/main/readme.md">README</a> for more information.</p>
+    </section>
+
     <footer>
       <p>Created by <a href="https://emanuelsaramago.com">Emanuel Saramago</a></p>
       <ul>
@@ -173,6 +174,6 @@
       </ul>
     </footer>
 
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>

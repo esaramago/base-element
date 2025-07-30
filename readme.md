@@ -6,7 +6,7 @@ A lightweight JavaScript class that extends `HTMLElement` and provides essential
 
 - No dependencies
 - No build tools required
-- Lightweight (~2.5kb minified)
+- Lightweight (~1.7kb minified) (~0.8kb gzipped)
 - Property management with validation
 - Shadow DOM support
 - Lifecycle hooks
@@ -18,7 +18,7 @@ Base Element is a standalone JavaScript file that can be used in any project.
 
 ### Direct Download
 
-Download [base-element.js](https://raw.githubusercontent.com/esaramago/base-element/main/src/base-element.js) from GitHub and import it in your project.
+Download [base-element.min.js](https://raw.githubusercontent.com/esaramago/base-element/main/dist/base-element.min.js) from GitHub and import it in your project.
 
 ## Usage
 
@@ -36,7 +36,9 @@ class MyComponent extends BaseElement {
     }
   }
 
-  static observedAttributes = ['myProperty'] // Array of attribute names to observe for changes
+  // Array of attribute names to observe for changes
+  // Only needed if you want to observe attributes changes, like document.querySelector('my-component').setAttribute('my-attribute', 'value')
+  static observedAttributes = ['my-attribute']
 
   styles() {
     return /* css */`
@@ -83,13 +85,13 @@ To develop Base Element locally:
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start development server
-npm run dev
+pnpm dev
 
 # Build for production
-npm run build
+pnpm build
 ```
 
 ## Contributing
@@ -102,11 +104,7 @@ npm run build
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
-## Author
-
-Emanuel Saramago - [emanuelsaramago.com](https://emanuelsaramago.com)
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/esaramago/base-element/blob/main/LICENCE) file for details
 
 ## Acknowledgments
 - Inspired by the love of web components

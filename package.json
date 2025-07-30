@@ -1,6 +1,6 @@
 {
   "name": "base-element",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "author": {
     "name": "Emanuel Saramago",
@@ -16,10 +16,13 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build",
+    "minify": "terser src/base-element.js -o dist/base-element.min.js -c -m",
+    "build": "vite build && pnpm run minify",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "rollup-plugin-copy": "^3.5.0",
+    "terser": "^5.43.1",
     "vite": "^7.0.4"
   },
   "dependencies": {

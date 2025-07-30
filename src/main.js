@@ -12,12 +12,15 @@ import './webcomponents/code.js'
 import './webcomponents/counter.js'
 
 
-const randomNames = ['Base Element', 'Web Component', 'Custom Element', 'Web Components', 'Web Developers', 'Designers', 'World', 'Creators', 'Base Component']
+const randomNames = ['Base Element', 'Web Components', 'Custom Elements', 'Web Developers', 'Designers', 'World', 'Creators', 'Base Components', "Makers"]
 
 
 document.addEventListener('DOMContentLoaded', () => {
   
   const headerCard = document.getElementById('header-hello')
+
+  if (!headerCard) return
+
   headerCard.name = randomNames[0]
 
   setInterval(() => {
