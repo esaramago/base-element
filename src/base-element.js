@@ -26,19 +26,26 @@ export class BaseElement extends HTMLElement {
    * - validator: Custom validation function
    * @type {Object}
    */
-  properties = {}
+  // properties = {}
 
   /**
    * Array of attribute names to observe for changes.
    * @type {string[]}
    */
-  static observedAttributes = []
+  // static observedAttributes = []
 
   /**
    * Indicates whether the element has been mounted in the DOM.
    * @type {boolean}
    */
   isMounted = false
+
+  /**
+   * Lifecycle method called before the element is mounted.
+   * Override to add initialization code.
+   */
+  // beforeRender() {}
+  
   
   /**
    * Renders the component's content.
@@ -46,13 +53,13 @@ export class BaseElement extends HTMLElement {
    * @abstract
    * @returns {string} HTML string to be rendered in the shadow DOM
    */
-  render() {}
+  // render() {}
 
   /**
    * Lifecycle method called when the element is mounted.
    * Override to add initialization code.
    */
-  mounted() {}
+  // mounted() {}
 
   /**
    * Lifecycle method called when an property is updated.
@@ -62,13 +69,16 @@ export class BaseElement extends HTMLElement {
    * @param {any} oldValue - The previous value of the property
    * @param {any} newValue - The new value of the property
    */
-  updated(property, oldValue, newValue) {}
+  // updated(property, oldValue, newValue) {}
 
   /**
    * Lifecycle method called when the element is connected to the DOM.
    * Initializes the component.
    */
   connectedCallback() {
+    if (this.beforeRender) {
+      this.beforeRender()
+    }
     this.#init()
   }
 
@@ -114,7 +124,7 @@ export class BaseElement extends HTMLElement {
           const property = this.properties[key]
           const attribute = key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
           const attributeValue = this.getAttribute(attribute)
-          const defaultValue = property.value  
+          const defaultValue = property.value
 
           const value = this.#validatePropValue({
             attribute,
@@ -165,7 +175,11 @@ export class BaseElement extends HTMLElement {
 
     })
 
-    Object.defineProperties(this, properties)
+    // define properties in the element if not already defined
+    Object.keys(properties).forEach((property) => {
+      if (this[property] !== undefined) return
+      Object.defineProperty(this, property, properties[property])
+    })
 
   }
 
@@ -203,9 +217,17 @@ export class BaseElement extends HTMLElement {
     var value = prop.value
   
     if (prop.type === String) {
-      value = String(value)
+      if (value || value === 0) {
+        value = String(value)
+      } else {
+        value = ""
+      }
     } else if (prop.type === Number) {
-      value = Number(value)
+      if (value !== false && value !== true && !isNaN(value)) {
+        value = Number(value)
+      } else {
+        value = null
+      }
     } else if (prop.type === Boolean) {
       if (value === "true" || value === true || value === "") {
         value = true
@@ -215,11 +237,11 @@ export class BaseElement extends HTMLElement {
     }
 
     if (prop.required && !value) {
-      throw new Error(`Required property ${prop.attribute} is missing`)
+      console.error(`Required property ${prop.attribute} is missing`)
     }
 
-    if (prop.validator && !prop.validator(value)) {
-      throw new Error(`Property ${prop.attribute} failed validation`)
+    if (value && prop.validator && !prop.validator(value)) {
+      console.error(`Property ${prop.attribute} failed validation`)
     }
   
     return value
